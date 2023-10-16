@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import AppLoading from "../organisms/AppLoading";
+
 import logo from "../../images/logo.svg";
 
 export default function Home() {
@@ -24,7 +26,7 @@ export default function Home() {
   const handleButtonClick = (e) => navigate(`/users/${currentUser}`);
 
   return isLoading ? (
-    <h1>Loading...</h1>
+    <AppLoading />
   ) : (
     <div className="home center">
       <div className="home__logo">

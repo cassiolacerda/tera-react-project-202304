@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import DrawerMenu from "../molecules/DrawerMenu";
 
@@ -13,7 +14,9 @@ export default function Default(props) {
 
       <div className="app-header">
         <div className="app-header__logo">
-          <img src={logo} className="responsive" alt="" />
+          <Link to="/">
+            <img src={logo} className="responsive" alt="" />
+          </Link>
         </div>
         <div className="app-header__menu">
           <i onClick={() => setOpen(true)} className="fa fa-bars"></i>

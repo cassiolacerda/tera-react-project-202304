@@ -2,15 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import AppLoading from "../organisms/AppLoading";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 import logo from "../../images/logo.svg";
 
-export default function Home(props) {
+export default function Home() {
   const navigate = useNavigate();
 
   const [users, setUsers] = React.useState([]);
-
   const [isLoading, setIsLoading] = React.useState(true);
+  const { currentUser, setCurrentUser } = React.useContext(GlobalContext);
 
   React.useEffect(() => {
     fetch("https://63cf09718a780ae6e6710dbe.mockapi.io/users")
@@ -21,9 +22,9 @@ export default function Home(props) {
       });
   }, []);
 
-  const handleUserChange = (e) => props.setCurrentUser(e.target.value);
+  const handleUserChange = (e) => setCurrentUser(e.target.value);
 
-  const handleButtonClick = (e) => navigate(`/users/${props.currentUser}`);
+  const handleButtonClick = (e) => navigate(`/users/${currentUser}`);
 
   return isLoading ? (
     <AppLoading />
@@ -33,7 +34,7 @@ export default function Home(props) {
         <img src={logo} className="responsive" alt="" />
       </div>
       <select
-        defaultValue={props.currentUser}
+        defaultValue={currentUser}
         onChange={handleUserChange}
         className="home__select-users"
       >
@@ -46,7 +47,7 @@ export default function Home(props) {
             </option>
           ))}
       </select>
-      {!!props.currentUser && (
+      {!!currentUser && (
         <button onClick={handleButtonClick} className="button-primary">
           Entrar
         </button>

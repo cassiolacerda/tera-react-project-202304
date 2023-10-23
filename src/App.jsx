@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/pages/Home";
@@ -10,10 +11,17 @@ import "./styles/fontawesome.min.css";
 import "./styles/main.css";
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState("");
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          }
+        />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:userId" element={<UserBlog />} />
         <Route path="/users/:userId/post" element={<PostForm />} />

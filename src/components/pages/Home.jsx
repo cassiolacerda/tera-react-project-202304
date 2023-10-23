@@ -5,11 +5,11 @@ import AppLoading from "../organisms/AppLoading";
 
 import logo from "../../images/logo.svg";
 
-export default function Home() {
+export default function Home(props) {
   const navigate = useNavigate();
 
   const [users, setUsers] = React.useState([]);
-  const [currentUser, setCurrentUser] = React.useState("");
+
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -21,9 +21,9 @@ export default function Home() {
       });
   }, []);
 
-  const handleUserChange = (e) => setCurrentUser(e.target.value);
+  const handleUserChange = (e) => props.setCurrentUser(e.target.value);
 
-  const handleButtonClick = (e) => navigate(`/users/${currentUser}`);
+  const handleButtonClick = (e) => navigate(`/users/${props.currentUser}`);
 
   return isLoading ? (
     <AppLoading />
@@ -32,7 +32,11 @@ export default function Home() {
       <div className="home__logo">
         <img src={logo} className="responsive" alt="" />
       </div>
-      <select onChange={handleUserChange} className="home__select-users">
+      <select
+        defaultValue={props.currentUser}
+        onChange={handleUserChange}
+        className="home__select-users"
+      >
         <option value="">Selecionar usuário</option>
         {users
           .sort((a, b) => a.fn.localeCompare(b.fn))
@@ -42,7 +46,7 @@ export default function Home() {
             </option>
           ))}
       </select>
-      {!!currentUser && (
+      {!!props.currentUser && (
         <button onClick={handleButtonClick} className="button-primary">
           Entrar
         </button>

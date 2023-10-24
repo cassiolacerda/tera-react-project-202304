@@ -8,6 +8,18 @@ import user2 from "../../images/placeholders/user-2.jpg";
 import user3 from "../../images/placeholders/user-3.jpg";
 
 export default function Users() {
+  const [users, setUsers] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://63cf09718a780ae6e6710dbe.mockapi.io/users")
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
+      });
+  }, []);
+
+  console.log("users", users);
+
   return (
     <Default>
       <div className="users">

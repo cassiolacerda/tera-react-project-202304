@@ -91,7 +91,8 @@ label {
   background-color: #fff;
 }
 
-.users__list-item:hover {
+.users__list-item:hover,
+.users__list-item.active {
   outline: 1px solid #000;
   background-color: #000;
   color: #fff;
